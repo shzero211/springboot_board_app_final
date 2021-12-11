@@ -4,6 +4,7 @@ package com.board.configuration;
 import javax.sql.DataSource;
 
 
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,16 +14,21 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @PropertySource("classpath:/application.properties")
+@EnableTransactionManagement
 public class DBConfiguration {
 	//스프링컨테이너 
 	@Autowired
 	private ApplicationContext applicationContext;
+	
 	
 	//application.properties에서 저 앞문장있는 설정들은 가져옴
 	@Bean
@@ -56,5 +62,10 @@ public class DBConfiguration {
 	public org.apache.ibatis.session.Configuration mybatisConfg(){
 		return new org.apache.ibatis.session.Configuration();
 		
+	}
+	
+	@Bean
+	public PlatformTransactionManager transactionManager() {
+		return new DataSourceTransactionManager(dataSource());
 	}
 }
