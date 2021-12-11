@@ -68,28 +68,28 @@
 		idx = #{idx}
 	</update>
 
-	<select id="selectBoardList" parameterType="BoardDTO"
-		resultType="BoardDTO">
+	<select id="selectBoardList" parameterType="BoardDTO" resultType="BoardDTO">
 		SELECT
-		<include refid="boardColumns" />
+			<include refid="boardColumns" />
 		FROM
-		tb_board
+			tb_board
 		WHERE
-		delete_yn = 'N'
+			delete_yn = 'N'
 		ORDER BY
-		notice_yn ASC,
-		idx DESC,
-		insert_time DESC
+			notice_yn ASC,
+			idx DESC,
+			insert_time DESC
+		LIMIT
+			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 
-	<select id="selectBoardTotalCount" parameterType="BoardDTO"
-		resultType="int">
+	<select id="selectBoardTotalCount" parameterType="BoardDTO" resultType="int">
 		SELECT
-		COUNT(*)
+			COUNT(*)
 		FROM
-		tb_board
+			tb_board
 		WHERE
-		delete_yn = 'N'
+			delete_yn = 'N'
 	</select>
 
 </mapper>

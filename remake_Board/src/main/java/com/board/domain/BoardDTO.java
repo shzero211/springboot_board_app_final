@@ -8,25 +8,27 @@ import lombok.Setter;
 //게시판 테이블(tb_board) 구체화역활 클래스
 @Getter
 @Setter
-public class BoardDTO {
+public class BoardDTO extends CommonDTO {
 
-		private Long idx;
-		
-		private String title;
-		
-		private String content;
-		
-		private String writer;
-		
-		private int viewCnt;
-		
-		private String noticeYn;
-		
-		private String secretYn;
-		
-		private String deleteYn;
-		
-		private LocalDateTime insertTime;
-		private LocalDateTime updateTime;
-		private LocalDateTime deleteTime;
+	/** 번호 (PK) */
+	private Long idx;
+
+	/** 제목 */
+	private String title;
+
+	/** 내용 */
+	private String content;
+
+	/** 작성자 */
+	private String writer;
+
+	/** 조회 수 */
+	private int viewCnt;
+
+	/** 공지 여부 */
+	private String noticeYn;
+
+	/** 비밀 여부 */
+	private String secretYn;
+
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.board.domain.BoardDTO;
 import com.board.mapper.BoardMapper;
+import com.board.paging.Criteria;
+import com.board.paging.PaginationInfo;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -23,8 +25,7 @@ public BoardMapper boardMapper;
 		}else {
 			queryResult=boardMapper.updateBoard(params);
 		}
-		BoardDTO board=null;
-		System.out.println(board.getTitle());
+		
 		return (queryResult==1?true:false);
 	}
 
@@ -45,12 +46,20 @@ public BoardMapper boardMapper;
 	}
 
 	@Override
-	public List<BoardDTO> getBoardList() {
-		List<BoardDTO> boardList=Collections.emptyList();
-		int boardTotalCount=boardMapper.selectBoardTotalCount();
-		if(boardTotalCount>0) {
-			boardList=boardMapper.selectBoardList();
+	public List<BoardDTO> getBoardList(BoardDTO params) {
+		List<BoardDTO> boardList = Collections.emptyList();
+		
+		int boardTotalCount = boardMapper.selectBoardTotalCount(params);
+
+		PaginationInfo paginationInfo = new PaginationInfo(params);
+		paginationInfo.setTotalRecordCount(boardTotalCount);
+
+		params.setPaginationInfo(paginationInfo);
+
+		if (boardTotalCount > 0) {
+			boardList = boardMapper.selectBoardList(params);
 		}
+
 		return boardList;
 	}
 

@@ -2,17 +2,20 @@ package com.board.controller;
 
 import java.util.List;
 
+
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.board.constant.Method;
 import com.board.domain.BoardDTO;
+import com.board.paging.Criteria;
 import com.board.service.BoardService;
 import com.board.util.UiUtils;
 @Controller
@@ -52,9 +55,10 @@ public class BoardController extends UiUtils {
 	}
 	
 	//입력 리스트 열기
+	//ModelAttribute는 파라미터로 전달받은 객체를 자동으로 뷰로 전달해준다
 	@GetMapping(value="/board/list.do")
-	public String openBoardList(Model model) {
-		List<BoardDTO> boardList=boardService.getBoardList();
+	public String openBoardList(@ModelAttribute("params")BoardDTO params,Model model) {
+		List<BoardDTO> boardList=boardService.getBoardList(params);
 		model.addAttribute("boardList",boardList);
 		return "board/list";
 	}
