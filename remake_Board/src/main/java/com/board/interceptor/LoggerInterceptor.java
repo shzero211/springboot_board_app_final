@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 public class LoggerInterceptor extends HandlerInterceptorAdapter{
 	private final Logger logger=LoggerFactory.getLogger(this.getClass());
-	
+	//URI가 들어가기전에  잡아주는 인터셉터
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -19,7 +19,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter{
 		logger.debug("Request URI======>"+request.getRequestURL());
 		return super.preHandle(request, response, handler);
 	}
-
+	//URI 가 들어온후 잡아주는 인터셉터
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
