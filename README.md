@@ -17,6 +17,10 @@
   
   # Views
 
-- **메인** url=http://localhost:8080/board/list.do
-
+- **게시글 리스트 화면** (http://localhost:8080/board/list.do)
+![main](https://user-images.githubusercontent.com/40134318/146670536-1ca1fde0-1eb9-4fae-8523-44cb833dece8.gif)
  
+- **상세보기 화면** (http://localhost:8080/board/view.do?페이지 정보 쿼리)
+
+- **게시글 작성 화면 ** (http://localhost:8080/board/write.do)
+- 
