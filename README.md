@@ -12,7 +12,7 @@
   
   📕connection pool:hikari
   
-  📕템플릿 엔진:Thymeleaf
+  📕템플릿 엔진:Thymeleafd
   
   
   # Views
